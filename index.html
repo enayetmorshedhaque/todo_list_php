@@ -3,14 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
+    <title>Simple ToDo App by PHP</title>
+
+    <!-- Bootstrap5 CSS CDN -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-
+    <!-- Datepicker CSS CDN Link -->
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <!-- Theme CSS Link -->
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
 
@@ -19,7 +26,7 @@
       <div class="mb-3">
         <div class="d-flex align-items-center justify-content-between">
           <div>
-            <a href="index.html"><strong>todo</strong></a>
+            <a href="index.html" class="link"><strong>todo</strong></a>
           </div>
           <div style="cursor: pointer">
             <i
@@ -71,6 +78,18 @@
                           id="task_description"
                           rows="5"
                         ></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="task_due_date" class="form-label"
+                          >Due Date</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control datepicker"
+                          id="task_due_date"
+                          name="task_due_date"
+                          aria-describedby="task_due_date_help"
+                        />
                       </div>
                       <div class="mb-3">
                         <label for="task_category" class="form-label"
@@ -248,13 +267,13 @@
                             <input
                               type="checkbox"
                               class="btn-check"
-                              id="category_emails"
+                              id="category_communication"
                               autocomplete="off"
                             />
                             <label
                               class="btn btn-outline-secondary"
-                              for="category_emails"
-                              >Calls/ Emails</label
+                              for="category_communication"
+                              >Communication</label
                             >
                           </div>
                           <div
@@ -297,13 +316,13 @@
                             <input
                               type="checkbox"
                               class="btn-check"
-                              id="category_read_watch_listen"
+                              id="category_entertainment"
                               autocomplete="off"
                             />
                             <label
                               class="btn btn-outline-secondary"
-                              for="category_read_watch_listen"
-                              >Read/ Watch/ Listen</label
+                              for="category_entertainment"
+                              >Entertainment</label
                             >
                           </div>
                           <div
@@ -374,10 +393,90 @@
             </div>
             <div class="d-flex align-items-center mb-2">
               <div>
-                <div class="circle family"></div>
+                <div class="circle home"></div>
               </div>
               <div>
-                <div class="category-title">&nbsp;Family</div>
+                <div class="category-title">&nbsp;Home</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle health"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Health</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle finance"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Finance</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle errands"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Errands</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle social"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Social</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle project"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Project</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle communication"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Communication</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle hobbies"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Hobbies</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle travel"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Travel</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle deadlines"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Deadlines</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <div>
+                <div class="circle self-improvement"></div>
+              </div>
+              <div>
+                <div class="category-title">&nbsp;Self-Improvement</div>
               </div>
             </div>
           </div>
@@ -408,12 +507,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates provident odit, nihil inventore vero voluptatum.
-                    Quo incidunt non adipisci aperiam itaque. Ea, consequuntur
-                    quasi sit quis suscipit modi deleniti culpa.
-                  </p>
+                  <p class="card-text">Task details goes here</p>
                 </div>
                 <div class="card-footer">
                   <div
@@ -461,12 +555,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates provident odit, nihil inventore vero voluptatum.
-                    Quo incidunt non adipisci aperiam itaque. Ea, consequuntur
-                    quasi sit quis suscipit modi deleniti culpa.
-                  </p>
+                  <p class="card-text">Task details goes here</p>
                 </div>
                 <div class="card-footer">
                   <div
@@ -485,6 +574,61 @@
                         name="input_checkbox"
                         id=""
                       />&nbsp;<small class="text-muted">Done</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="card h-100 shadow-sm">
+                <s>
+                  <div class="card-body">
+                    <div
+                      class="d-flex align-items-center justify-content-between mb-2"
+                    >
+                      <div>
+                        <h5 class="card-title mb-1">The first task title</h5>
+                      </div>
+                      <div class="action">
+                        <div class="dropdown">
+                          <i
+                            class="fa-solid fa-ellipsis ropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          ></i>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a class="dropdown-item" href="#">Edit...</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#">Delete</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="card-text">Task details goes here</p>
+                  </div>
+                </s>
+                <div class="card-footer">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <div class="d-flex todo-category">
+                      <div class="circle study"></div>
+                      <div class="circle entertainment"></div>
+                      <div class="circle work"></div>
+                    </div>
+                    <div
+                      class="d-flex align-items-center justify-content-between"
+                    >
+                      <input
+                        type="checkbox"
+                        name="input_checkbox"
+                        id=""
+                        checked
+                      />&nbsp;<small class="text-muted fw-bold">Done</small>
                     </div>
                   </div>
                 </div>
@@ -514,65 +658,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates provident odit, nihil inventore vero voluptatum.
-                    Quo incidunt non adipisci aperiam itaque. Ea, consequuntur
-                    quasi sit quis suscipit modi deleniti culpa.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <div
-                    class="d-flex align-items-center justify-content-between"
-                  >
-                    <div class="d-flex todo-category">
-                      <div class="circle study"></div>
-                      <div class="circle entertainment"></div>
-                      <div class="circle work"></div>
-                    </div>
-                    <div
-                      class="d-flex align-items-center justify-content-between"
-                    >
-                      <input
-                        type="checkbox"
-                        name="input_checkbox"
-                        id=""
-                      />&nbsp;<small class="text-muted">Done</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                  <div
-                    class="d-flex align-items-center justify-content-between mb-2"
-                  >
-                    <div>
-                      <h5 class="card-title mb-1">The first task title</h5>
-                    </div>
-                    <div class="action">
-                      <div class="dropdown">
-                        <i
-                          class="fa-solid fa-ellipsis ropdown-toggle"
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        ></i>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Edit...</a></li>
-                          <li><a class="dropdown-item" href="#">Delete</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates provident odit, nihil inventore vero voluptatum.
-                    Quo incidunt non adipisci aperiam itaque. Ea, consequuntur
-                    quasi sit quis suscipit modi deleniti culpa.
-                  </p>
+                  <p class="card-text">Task details goes here</p>
                 </div>
                 <div class="card-footer">
                   <div
@@ -600,22 +686,47 @@
         </div>
       </div>
     </div>
+
+    <!-- Bootstrap JS CDN Link -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Fontawesome Kit JS CDN Link -->
     <script
       src="https://kit.fontawesome.com/86bc96ac49.js"
       crossorigin="anonymous"
     ></script>
 
+    <!-- jQuery CDN Link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- Datepicker CDN Link -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <!-- Bootstrap Modal JS -->
     <script>
       const myModal = document.getElementById("myModal");
       const myInput = document.getElementById("task_name");
 
       myModal.addEventListener("shown.bs.modal", () => {
         myInput.focus();
+      });
+    </script>
+
+    <!-- Page JS -->
+    <script>
+      $(document).ready(function () {
+        // Auto Date Selection
+        $(function () {
+          $("#task_due_date")
+            .datepicker({
+              dateFormat: "yy-mm-dd",
+            })
+            .datepicker("setDate", "today");
+        });
       });
     </script>
   </body>

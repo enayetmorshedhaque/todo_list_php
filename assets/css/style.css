@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 html,
 body {
@@ -6,19 +6,27 @@ body {
 }
 
 * {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
   text-decoration: none;
   color: black;
-  font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
 }
 
+.link {
+  font-size: 24px;
+}
+
 #task_name {
   font-weight: bold;
+}
+
+.ui-draggable,
+.ui-droppable {
+  background-position: top;
 }
 
 .category-list > div {
@@ -26,8 +34,8 @@ a {
 }
 
 .circle {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   border: none;
   border-radius: 50%;
 }
@@ -48,12 +56,61 @@ a {
   background-color: #ffcece;
 }
 
-.family {
+.personal {
   background-color: #daf2d6;
+}
+
+.deadlines {
+  background-color: #f38181;
+}
+
+.home {
+  background-color: #609966;
+}
+
+.health {
+  background-color: #3282b8;
+}
+
+.finance {
+  background-color: #fce38a;
+}
+
+.errands {
+  background-color: #c9d6df;
+}
+
+.social {
+  background-color: #142850;
+}
+
+.project {
+  background-color: #bbe1fa;
+}
+
+.communication {
+  background-color: #ea906c;
+}
+
+.hobbies {
+  background-color: #161a30;
+}
+
+.travel {
+  background-color: #bb9cc0;
+}
+
+.self-improvement {
+  background-color: #e3651d;
 }
 
 .used-category-list > div {
   flex: 0 0 calc(20% - 5px); /* Adjust the width based on your design */
+  box-sizing: border-box;
+}
+
+.used-category-list > div:last-child {
+  flex: none; /* Adjust the width based on your design */
   box-sizing: border-box;
 }
 
@@ -78,6 +135,10 @@ a {
 .card-footer {
   background-color: #fff;
   border: 0;
+}
+
+.task-done > span {
+  font-weight: bold;
 }
 
 .todo-category {
