@@ -104,6 +104,10 @@ a {
   background-color: #e3651d;
 }
 
+.others {
+  background-color: #554943;
+}
+
 .used-category-list > div {
   flex: 0 0 calc(20% - 5px); /* Adjust the width based on your design */
   box-sizing: border-box;
