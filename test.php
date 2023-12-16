@@ -1,47 +1,48 @@
 <?php
-// Replace these variables with your database credentials
-$host = 'localhost';
-$dbname = 'todo_app';
-$user = 'root';
-$pass = '';
 
+// Replace these variables with your actual database credentials
+$host = "localhost";
+$dbname = "todo_app";
+$username = "root";
+$password = "";
+
+// Establish a database connection using PDO
 try {
-    // Establish a database connection
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    // Set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Fetch data from the database
-    $stmt = $pdo->query("SELECT * FROM todo_task");
-    $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Iterate through each student
-    foreach ($tasks as $task) {
-        $taskId = $task['id'];
-        $taskName = $task['title'];
-
-        echo "Task ID: $taskId, Task Name: $taskName<br>";
-
-        // Fetch grades for the current student
-        $stmt = $pdo->prepare("SELECT * FROM task_categories WHERE task_id = :id");
-        $stmt->bindParam(':id', $taskId);
-        $stmt->execute();
-        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Iterate through each grade for the current student
-        foreach ($categories as $category) {
-            $categoryId = $category['id'];
-            $categoryValue = $category['category_name'];
-
-            echo "  Category ID: $categoryId, Category Value: $categoryValue<br>";
-        }
-
-        echo "<hr>";
-    }
-
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    die("Connection failed: " . $e->getMessage());
 }
 
-// Close the database connection
-$pdo = null;
+try {
+    $sql = "SELECT task_id, category_name FROM task_categories";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    // Fetch all rows as an associative array
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $taskData = array();
+    foreach ($rows as $row) {
+        $task_id = $row['task_id'];
+        $category_name = $row['category_name'];
+        $taskData[$task_id][] = $category_name;
+    }
+
+    // Display the data in separate cards
+    foreach ($taskData as $task_id => $categories) {
+        echo "<div class='card'>";
+        echo "<h2>Task ID: $task_id</h2>";
+
+        foreach ($categories as $category) {
+            echo "<p>$category</p>";
+        }
+
+        echo "</div>";
+    }
+} catch (PDOException $e) {
+    die("Query failed: " . $e->getMessage());
+}
+
 ?>
