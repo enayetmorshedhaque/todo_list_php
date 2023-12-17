@@ -4,55 +4,9 @@ $connection = require_once './assets/db/connection/connection.php';
 
 $categories = $connection->get_categories();
 $used_categories =
-  $connection->get_used_categories();
+    $connection->get_used_categories();
 $todo_tasks = $connection->get_todo_list();
-
-// echo "<pre>";
-// var_dump($todo_tasks);
-// echo "</pre>";
-
-// Organize data into separate arrays based on task_id $taskData = array();
-// foreach ($todo_tasks as $row) {
-//   $task_id = $row['id'];
-//   $category_name = $row['category_name'];
-//   $taskData[$task_id][] = $category_name;
-// }
-
-// // Display the data in separate cards
-// foreach ($taskData as $task_id => $categories) {
-//   echo $task_id;
-//   foreach ($categories as $category) {
-//     echo "<p>$category</p>";
-//   }
-// }
-// ================================================================================================
-
-$groupedTasks = [];
-$groupedCategories = [];
-
-foreach ($todo_tasks as $task) {
-  $taskId = $task['id'];
-  $groupedTasks[$taskId][] = $task;
-  $category_name = $task['category_name'];
-  $groupedCategories[$taskId][] = $category_name;
-}
-
-// Display tasks grouped by task_id
-foreach ($groupedTasks as $taskId => $tasks) {
-  echo "<div>";
-  echo "<h3>Task ID: $taskId</h3>";
-  foreach ($tasks as $task) {
-    echo "<div>";
-    echo "<p>Title: {$task['title']}</p>";
-    echo "<p>Description: {$task['description']}</p>";
-    echo "<p>Due Date: {$task['create_date']}</p>";
-    foreach ($groupedCategories as $category) {
-      echo "<p>Category: {$category}</p>";
-    }
-    echo "</div>";
-  }
-  echo "</div>";
-}
+$card_categories = $connection->get_card_categories();
 
 ?>
 
@@ -114,16 +68,16 @@ foreach ($groupedTasks as $taskId => $tasks) {
                                             <label for="task_category" class="form-label">Task Category</label>
                                             <div class="category-list">
                                                 <?php foreach ($categories as $category): ?>
-                                                <div class="btn-group align-items-center" role="group">
-                                                    <input type="checkbox" class="btn-check" name="category[]"
-                                                        id="<?php echo $category['category_name'] ?>"
-                                                        value="<?php echo $category['category_name'] ?>"
-                                                        autocomplete="off" />
-                                                    <label class="btn btn-outline-secondary"
-                                                        for="<?php echo $category['category_name']; ?>">
-                                                        <?php echo ucfirst($category['category_name']) ?>
-                                                    </label>
-                                                </div>
+                                                    <div class="btn-group align-items-center" role="group">
+                                                        <input type="checkbox" class="btn-check" name="category[]"
+                                                            id="<?php echo $category['category_name'] ?>"
+                                                            value="<?php echo $category['category_name'] ?>"
+                                                            autocomplete="off" />
+                                                        <label class="btn btn-outline-secondary"
+                                                            for="<?php echo $category['category_name']; ?>">
+                                                            <?php echo ucfirst($category['category_name']) ?>
+                                                        </label>
+                                                    </div>
                                                 <?php endforeach; ?>
                                             </div>
                                         </div>
@@ -148,72 +102,72 @@ foreach ($groupedTasks as $taskId => $tasks) {
                 <p class="fw-bold">Used Categories</p>
                 <div class="mt-2 d-lg-grid d-flex gap-1 flex-wrap used-category-list">
                     <?php foreach ($used_categories as $used_category): ?>
-                    <div class="d-flex align-items-center mb-2">
-                        <div>
-                            <div class="circle <?php echo $used_category['category_name'] ?>"></div>
-                        </div>
-                        <div>
-                            <div class="category-title">
-                                &nbsp;
-                                <?php echo ucfirst($used_category['category_name']) ?>
+                        <div class="d-flex align-items-center mb-2">
+                            <div>
+                                <div class="circle <?php echo $used_category['category_name'] ?>"></div>
+                            </div>
+                            <div>
+                                <div class="category-title">
+                                    &nbsp;
+                                    <?php echo ucfirst($used_category['category_name']) ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <?php endforeach; ?>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="row">
-                    <?php foreach ($taskData as $task_id => $categories): ?>
-                    <div class="col-md-6 col-sm-12 mb-3">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <div>
-                                        <h5 class="card-title mb-1">
-                                            <?php echo $title ?>
-                                        </h5>
-                                        <small>
-                                            <?php echo DateTime::createFromFormat('Y-m-d', $create_date)->format('d-m-Y');
-                        ?>
-                                        </small>
-                                    </div>
-                                    <div class="action">
-                                        <div class="dropdown">
-                                            <i class="fa-solid fa-ellipsis ropdown-toggle" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="?id=<?php echo $task_id ?>">Edit...</a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                        href="?id=<?php echo $task_id ?>">Delete</a>
-                                                </li>
-                                            </ul>
+                    <?php foreach ($todo_tasks as $task): ?>
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div>
+                                            <h5 class="card-title mb-1">
+                                                <?php echo $task['title'] ?>
+                                            </h5>
+                                            <small>
+                                                <?php echo DateTime::createFromFormat('Y-m-d', $task['create_date'])->format('d-m-Y');
+                                                ?>
+                                            </small>
+                                        </div>
+                                        <div class="action">
+                                            <div class="dropdown">
+                                                <i class="fa-solid fa-ellipsis ropdown-toggle" type="button"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="?id=<?php echo $task['id'] ?>">Edit...</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="?id=<?php echo $task['id'] ?>">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
+                                    <p class="card-text">
+                                        <?php echo $task['description'] ?>
+                                    </p>
                                 </div>
-                                <p class="card-text">
-                                    <?php echo $description ?>
-                                </p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="d-flex todo-category">
-                                        <?php foreach ($categories as $category): ?>
-                                        <div class="circle <?php echo $category ?>"></div>
-                                        <?php endforeach; ?>
-                                    </div>
+                                <div class="card-footer">
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" name="input_checkbox" id="" />&nbsp;<small
-                                            class="text-muted">Done</small>
+                                        <div class="d-flex todo-category">
+                                            <?php foreach ($task['category_name'] as $category): ?>
+                                                <div class="circle <?php echo $category['category_name'] ?>"></div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <input type="checkbox" name="input_checkbox" id="" />&nbsp;<small
+                                                class="text-muted">Done</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -223,7 +177,7 @@ foreach ($groupedTasks as $taskId => $tasks) {
     <!-- Bootstrap JS CDN Link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Fontawesome Kit JS CDN Link -->
     <script src="https://kit.fontawesome.com/86bc96ac49.js" crossorigin="anonymous"></script>
@@ -236,26 +190,26 @@ foreach ($groupedTasks as $taskId => $tasks) {
 
     <!-- Bootstrap Modal JS -->
     <script>
-    const myModal = document.getElementById("myModal");
-    const myInput = document.getElementById("task_name");
+        const myModal = document.getElementById("myModal");
+        const myInput = document.getElementById("task_name");
 
-    myModal.addEventListener("shown.bs.modal", () => {
-        myInput.focus();
-    });
+        myModal.addEventListener("shown.bs.modal", () => {
+            myInput.focus();
+        });
     </script>
 
     <!-- Page JS -->
     <script>
-    $(document).ready(function() {
-        // Auto Date Selection
-        $(function() {
-            $("#task_due_date")
-                .datepicker({
-                    dateFormat: "yy-mm-dd",
-                })
-                .datepicker("setDate", "today");
+        $(document).ready(function () {
+            // Auto Date Selection
+            $(function () {
+                $("#task_due_date")
+                    .datepicker({
+                        dateFormat: "yy-mm-dd",
+                    })
+                    .datepicker("setDate", "today");
+            });
         });
-    });
     </script>
 </body>
 
