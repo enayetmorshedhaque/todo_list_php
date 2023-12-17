@@ -27,13 +27,6 @@ class Connection
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get_card_categories()
-    {
-        $statement = $this->pdo->prepare("SELECT task_id, category_name FROM `task_categories`");
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public function add_todo_task($todo_task)
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
