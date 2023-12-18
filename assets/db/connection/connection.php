@@ -1,6 +1,6 @@
 <?php
 
-require_once('./assets/db/db_config/db_config.php');
+require_once('db_config.php');
 
 class Connection
 {
@@ -58,6 +58,7 @@ class Connection
                 $stmt->execute();
             }
         }
+        header('Location: ../../../index.html');
     }
 
     public function get_todo_list()
@@ -91,6 +92,25 @@ class Connection
 
         // Output the result
         return $todo_task_data;
+    }
+
+    public function remove_task()
+    {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+
+            // Delete task from table
+            $statement = $this->pdo->prepare("DELETE FROM todo_task WHERE id = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+
+            // Delete task category from table
+            $statementCategory = $this->pdo->prepare("DELETE FROM task_categories WHERE task_id = :id");
+            $statementCategory->bindValue(':id', $id);
+            $statementCategory->execute();
+
+            header("Location: ../../../index.html");
+        }
     }
 }
 

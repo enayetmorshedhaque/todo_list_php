@@ -1,2 +1,2 @@
-/assets/db/db_config
+/assets/db/connection/db_config.php
 test.php
